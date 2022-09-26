@@ -1,41 +1,63 @@
-//parseFloat will parse the string to float or decimal if there is a float number
-const firstNumber = parseFloat(prompt("First number: "));
-const operator = prompt("Operator: ");
-const secondNumber = parseFloat(prompt("Second number: "));
+const keys = document.querySelector(".calc-keys")
+const calculator = document.querySelector(".calculator");
 
-alert ("Result is: " +CALCULATE(firstNumber, operator, secondNumber));
 
-//alert(`${firstNumber} ${operator} ${secondNumber}`);
+//all the action keys in click event
+keys.addEventListener("click", (event) =>{
 
-// CALCULATE FUNCTION
-    // - can ADD, SUBTRACT, DIVIDE or MULTIPLY
-    // - can PERCENTAGE
-    // - can SQUARE ROOT
-    // - can handle three or more numbers
+    if(event.target.matches("button")){
+        const key = event.target;
+        const action = key.dataset.action;
+       if (!action) {
+            console.log("number")
+          }
 
-function CALCULATE(firstNumber, operator, secondNumber){
-    
-    switch(operator){
-        case '+':
-            return firstNumber + secondNumber;
-            break;
-        case '-':
-            return firstNumber - secondNumber;
-            break;
-        case '*':
-            return firstNumber * secondNumber;
-            break;
-        case '/':
-            return firstNumber / secondNumber;
-            break;
-        case '%':
-            return (firstNumber*secondNumber)/100;
-            break;
-        
-        
-            
+          if (
+                action === 'add' ||
+                action === 'subtract' ||
+                action === 'multiply' ||
+                action === 'divide' ||
+                action === 'percentage' ||
+                action === 'squareroot'
+              ) {
+                console.log("operator")
+              }
+
+              if (action === 'decimal') {
+                console.log("decimal")
+              }
+              
+              if (action === 'clear') {
+                console.log("clear")
+              }
+              
+              if (action === 'calculate') {
+                console.log("equal")
+              }
     }
-}
+});
+
+const display = document.querySelector(".calc-display")
+
+keys.addEventListener("click", (event) =>{
+
+    if(event.target.matches("button")){
+        const key = event.target;
+        const action = key.dataset.action;
+        const keyContent = key.dataset.action;
+        const displayedNum = display.textContent;
+
+          if (!action) {
+            if (displayedNum === "0") {
+              display.textContent = keyContent
+            } else {
+              display.textContent = displayedNum + keyContent
+            }
+          }
+    }
+});
+
+
 
 
 
