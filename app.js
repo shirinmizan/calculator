@@ -1,3 +1,4 @@
+
 //calculate function
 const calculate = (firstNumber, operator, secondNumber) => {
     let result = "";
@@ -26,9 +27,13 @@ const squareroot = (number, operator) => {
 }
 
 const calculator = document.querySelector(".calculator");
-const display = calculator.querySelector(".calc-display");
-const keys = calculator.querySelector(".calc-keys");
+const display = document.querySelector("#display");
+const keys = document.querySelector(".calc-keys");
+//const clear = document.querySelector("#clear");
+//const operators = document.querySelectorAll(".operator");
+const equal = document.querySelector(".equal-sign");
 
+//if the pressed item is a button
 keys.addEventListener("click", e => {
     if (e.target.matches("button")) {
         const key = e.target;
@@ -50,12 +55,12 @@ keys.addEventListener("click", e => {
             display.textContent = displayedNum + ".";
         }
 
-        if ( action === "add" || action === "subtract" || action === "multiply" ||
-            action === "divide" || action === "percentage" || action === "squareroot") 
-        {
+        if (action === "add" || action === "subtract" || action === "multiply" ||
+            action === "divide" || action === "percentage" || action === "squareroot") {
             calculator.dataset.previousKeyType = "operator";
             calculator.dataset.firstValue = displayedNum;
             calculator.dataset.operator = action;
+           
         }
 
         if (action === "clear") {
@@ -70,15 +75,15 @@ keys.addEventListener("click", e => {
         }
 
         if (action === "calculate") {
-            const firstValue = calculator.dataset.firstValue;
-            const operator = calculator.dataset.operator;
-            const secondValue = displayedNum;
+                const firstValue = calculator.dataset.firstValue;
+                const operator = calculator.dataset.operator;
+                const secondValue = displayedNum;
 
-            display.textContent = calculate(firstValue, operator, secondValue);
-        }
+                display.textContent = calculate(firstValue, operator, secondValue);
+            }
+
     }
 });
-
 
 
 
