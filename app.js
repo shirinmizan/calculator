@@ -35,7 +35,9 @@ keys.addEventListener("click", e => {
     if (e.target.matches("button")) {
         const key = e.target;
         const action = key.dataset.action;
+        //calculator pressed key
         const keyContent = key.textContent;
+        //displayed number in the calculator screen
         const displayedNum = display.textContent;
         const previousNumKey = calculator.dataset.previousNumKey;
 
