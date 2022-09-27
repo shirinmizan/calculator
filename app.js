@@ -30,14 +30,14 @@ const calculator = document.querySelector(".calculator");
 const display = document.querySelector("#display");
 const keys = document.querySelector(".calc-keys");
 
-//if the pressed item is a button
+//if the pressed item is a button 
 keys.addEventListener("click", e => {
     if (e.target.matches("button")) {
         const key = e.target;
         const action = key.dataset.action;
-        //the pressed key information from user input
+        //the pressed key information from user
         const keyValue = key.textContent;
-        //displayed number in the calculator screen
+        //displayed number form the calculator
         const displayedNum = display.textContent;
         const previousNumKey = calculator.dataset.previousNumKey;
 
@@ -73,7 +73,7 @@ keys.addEventListener("click", e => {
             const firstValue = calculator.dataset.firstValue;
             const operator = calculator.dataset.operator;
             const secondValue = displayedNum;
-            
+
             display.textContent = calculate(firstValue, operator, secondValue);
             calculator.dataset.previousNumKey = "calculate";
         }
