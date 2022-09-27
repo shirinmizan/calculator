@@ -29,9 +29,6 @@ const squareroot = (number, operator) => {
 const calculator = document.querySelector(".calculator");
 const display = document.querySelector("#display");
 const keys = document.querySelector(".calc-keys");
-//const clear = document.querySelector("#clear");
-//const operators = document.querySelectorAll(".operator");
-const equal = document.querySelector(".equal-sign");
 
 //if the pressed item is a button
 keys.addEventListener("click", e => {
@@ -40,15 +37,23 @@ keys.addEventListener("click", e => {
         const action = key.dataset.action;
         const keyContent = key.textContent;
         const displayedNum = display.textContent;
-        const previousKeyType = calculator.dataset.previousKeyType;
+        const previousNumKey = calculator.dataset.previousNumKey;
 
         if (!action) {
             console.log("number keys");
-            if (displayedNum === "0" || previousKeyType === "operator") {
+            if (
+                displayedNum === "0" ||
+                previousNumKey === "operator" ||
+                previousNumKey === "calculate"
+            )
+            {
                 display.textContent = keyContent;
-            } else {
+            } 
+            else{
                 display.textContent = displayedNum + keyContent;
             }
+
+           calculator.dataset.previousNumKey = "number";
         }
 
         if (action === "decimal") {
@@ -57,15 +62,20 @@ keys.addEventListener("click", e => {
 
         if (action === "add" || action === "subtract" || action === "multiply" ||
             action === "divide" || action === "percentage" || action === "squareroot") {
-            calculator.dataset.previousKeyType = "operator";
+           
+            calculator.dataset.previousNumKey = "operator";
             calculator.dataset.firstValue = displayedNum;
             calculator.dataset.operator = action;
-           
+         }
+        if (action === "calculate") {
+            const firstValue = calculator.dataset.firstValue;
+            const operator = calculator.dataset.operator;
+            const secondValue = displayedNum;
+            display.textContent = calculate(firstValue, operator, secondValue);
         }
-
         if (action === "clear") {
-            // display.innerHTML = "";
             display.textContent = "0";
+            calculator.dataset.previousNumKey = "clear"
             console.log("clear key")
         }
         if (action === "squareroot") {
@@ -73,15 +83,6 @@ keys.addEventListener("click", e => {
             const operator = calculator.dataset.operator;
             display.textContent = squareroot(number, operator);
         }
-
-        if (action === "calculate") {
-                const firstValue = calculator.dataset.firstValue;
-                const operator = calculator.dataset.operator;
-                const secondValue = displayedNum;
-
-                display.textContent = calculate(firstValue, operator, secondValue);
-            }
-
     }
 });
 
